@@ -13,10 +13,17 @@
 
 use Illuminate\Support\Facades\Route;
 
+Auth::routes();
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+});
 
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('employees', 'EmployeeController');
+Route::resource('positions', 'PositionController');
 Route::resource('students','studentController');
 Route::resource('teachers', 'teacherController');
-

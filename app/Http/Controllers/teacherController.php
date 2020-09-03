@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Teacher;
+use App\Model\Teacher;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 
 class teacherController extends Controller
 {
@@ -16,16 +15,9 @@ class teacherController extends Controller
      */
     public function index()
     {
-        if (request()->ajax()){
-            return datatables()->of(Teacher::get())
-                ->addColumn('action', function ($data){
-                 return '<button type="button" class="edit btn btn-warning btn-sm" name="edit" id="'.$data->id.'">Edit</button>';
-//                    return '<button type="button" class="delete btn btn-danger btn-sm" name="delete" id="'.$data->id.'">Delete</button>';
-                })
-                ->make(true);
-        }
+       $teachers = Teacher::all();
 
-        return view('teacher.index');
+        return view('teacher.index', compact('teachers'));
 
     }
 
@@ -76,7 +68,8 @@ class teacherController extends Controller
      */
     public function edit($id)
     {
-        //
+        $teacher = Teacher::findOrFail($id);
+        return \view('teacher.edit',\compact('teacher'));
     }
 
     /**
