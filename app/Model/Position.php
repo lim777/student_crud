@@ -9,8 +9,10 @@ class Position extends Model
     protected $table = 'positions';
     protected $fillable = [
         'title',
-        'description'
+        'description',
+        'employees_id'
     ];
+    public $timestamps = false;
 
     /**
      * A position is own by Employees;

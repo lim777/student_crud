@@ -51,6 +51,12 @@
                         <p>Employee</p>
                     </a>
                 </li>
+                <li class="{{'positions' == request()->path() ? 'active' : ''}}">
+                    <a href="/positions">
+                        <i class="fas fa-asterisk"></i>
+                        <p>Position</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

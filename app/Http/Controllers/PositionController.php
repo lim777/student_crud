@@ -1,7 +1,10 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PositionRequest;
+use App\Model\Employee;
+use App\Model\Position;
 use Illuminate\Http\Request;
 
 class PositionController extends Controller
@@ -13,7 +16,9 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        $positions = Position::all();
+        return view('position.index',compact('positions'));
+
     }
 
     /**
@@ -23,7 +28,11 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        $employees = array();
+        foreach (Employee::all() as $employee){
+            $employees[$employee->id] = $employee->name;
+        }
+        return view('position.create', compact('employees'));
     }
 
     /**
@@ -32,9 +41,10 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PositionRequest $request)
     {
-        //
+        Position::create($request->all());
+        return redirect()->route('positions.index');
     }
 
     /**
@@ -56,7 +66,12 @@ class PositionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $positions = Position::findOrFail($id);
+        $employees = array();
+        foreach (Employee::all() as $employee){
+            $employees[$employee->id] = $employee->name;
+        }
+        return view('position.edit', compact('positions','employees'));
     }
 
     /**
@@ -66,9 +81,12 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PositionRequest $request, $id)
     {
-        //
+        $positions = Position::findOrFail($id);
+        $employees = array();
+        $positions->update($request->all());
+        return redirect()->route('positions.index');
     }
 
     /**
@@ -79,6 +97,8 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $positions = Position::findOrFail($id);
+        $positions->delete();
+        return redirect('positions');
     }
 }

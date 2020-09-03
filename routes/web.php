@@ -20,9 +20,11 @@ Route::get('/', function () {
 Route::get('/admin', function () {
     return view('admin.dashboard');
 });
-
+// Home controller
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+//
 Route::resource('employees', 'EmployeeController');
 Route::resource('positions', 'PositionController');
 Route::resource('students','studentController');

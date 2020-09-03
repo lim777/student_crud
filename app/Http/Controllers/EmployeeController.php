@@ -1,4 +1,6 @@
-<?php /** @noinspection PhpUndefinedMethodInspection */
+<?php /** @noinspection ALL */
+
+/** @noinspection PhpUndefinedMethodInspection */
 
 namespace App\Http\Controllers;
 
@@ -17,6 +19,7 @@ class EmployeeController extends Controller
     {
         $employees = Employee::all();
         return view('employee.index', compact('employees'));
+
     }
 
     /**
