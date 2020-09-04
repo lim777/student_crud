@@ -55,7 +55,7 @@ class EmployeeController extends Controller
 //            $employees->dob = $request->input('dob');
 //        $employees->save();
 
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')->with(['flash_message' =>'Date created successfuly']);
     }
 
     /**
@@ -92,7 +92,7 @@ class EmployeeController extends Controller
     {
         $employees = Employee::findOrFail($id);
         $employees->update($request->all());
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')->with(['flash_message' =>'Date updated successfuly']);
     }
 
     /**
@@ -105,6 +105,6 @@ class EmployeeController extends Controller
     {
         $employees = Employee::findOrFail($id);
         $employees->delete();
-        return redirect('employees');
+        return redirect('employees')->with(['flash_message' =>'Date deleted successfuly']);
     }
 }

@@ -43,7 +43,7 @@
                                             <form action="{{route('positions.destroy',$position->id)}}" method="post">
                                                 {{csrf_field()}}
                                                 {{method_field('delete')}}
-                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                <button type="submit" data-id="{{$position->id}}" value="{{$position->id}}" class="delete btn btn-danger btn-sm">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -58,4 +58,8 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('scripts')
+
 @stop

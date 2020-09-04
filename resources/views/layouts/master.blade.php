@@ -1,5 +1,6 @@
 
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en">
 
 <head>
@@ -20,6 +21,9 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('assets/demo/demo.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     @yield('style')
 </head>
 
@@ -129,6 +133,11 @@
         <div class="panel-header panel-header-sm">
         </div>
         <div class="content">
+            @if (Session::has('flash_message'))
+                <div class="alert alert-success">
+                    {{session('flash_message')}}
+                </div>
+            @endif
             @yield('content')
         </div>
 
@@ -152,7 +161,10 @@
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset('assets/js/now-ui-dashboard.min.js?v=1.5.0')}}" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{asset('assets/demo/demo.js')}}"></script>
-
+<script src="https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.min.js"></script>
+<script>
+    $('div.alert').delay(2000).slideUp(300);
+</script>
 @yield('scripts')
 </body>
 

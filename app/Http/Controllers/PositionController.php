@@ -33,6 +33,8 @@ class PositionController extends Controller
             $employees[$employee->id] = $employee->name;
         }
         return view('position.create', compact('employees'));
+
+
     }
 
     /**
@@ -44,7 +46,7 @@ class PositionController extends Controller
     public function store(PositionRequest $request)
     {
         Position::create($request->all());
-        return redirect()->route('positions.index');
+        return redirect()->route('positions.index')->with(['flash_message' =>'Date created successfuly']);
     }
 
     /**
@@ -86,7 +88,7 @@ class PositionController extends Controller
         $positions = Position::findOrFail($id);
         $employees = array();
         $positions->update($request->all());
-        return redirect()->route('positions.index');
+        return redirect()->route('positions.index')->with(['flash_message' =>'Date updated successfuly']);
     }
 
     /**
@@ -99,6 +101,6 @@ class PositionController extends Controller
     {
         $positions = Position::findOrFail($id);
         $positions->delete();
-        return redirect('positions');
+        return redirect('positions')->with(['flash_message' =>'Date deleted successfuly']);
     }
 }
